@@ -26,6 +26,7 @@
 .pub-cache/
 .pub/
 /build/
+./lib/core/util/.secret_token.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar

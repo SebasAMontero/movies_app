@@ -9,4 +9,5 @@ abstract class Palette {
   static const Color details = Color(0xffE7AB79);
   static const Color success = Color(0xff009944);
   static const Color warning = Color(0xffCF000F);
+  static Color containerColor = Colors.black.withOpacity(0.2);
 }

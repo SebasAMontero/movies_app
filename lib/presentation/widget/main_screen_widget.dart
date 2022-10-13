@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/util/constants.dart';
 import '../../core/util/keys.dart';
 import '../../core/util/palette.dart';
+import '../view/top_rated.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -134,26 +135,8 @@ class _MainScreenState extends State<MainScreenWidget>
                       ),
                     ],
                   ),
-                  Column(
+                  const TopRated(
                     key: Keys.topRatedKey,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.do_not_disturb_off_outlined,
-                        size: Constants.notFoundIconSize,
-                        color: Palette.primaryLight,
-                      ),
-                      Padding(
-                        padding: Constants.topSmallPadding,
-                        child: Text(
-                          Constants.notFoundMessage,
-                          style: TextStyle(
-                            color: Palette.primaryLight,
-                            fontSize: Constants.notFoundFontSize,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                   Column(
                     key: Keys.upcomingKey,
