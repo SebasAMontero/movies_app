@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../../core/util/string_constants.dart';
 import '../../domain/entity/movie_event.dart';
 import '../../domain/repository/database_response.dart';
 import '../../domain/repository/i_movies_repository.dart';
@@ -24,6 +25,13 @@ class MoviesRepository with DatabaseResponse implements IMoviesRepository {
   Database get database => _db;
 
   @override
+  Future<MovieEvent> searchMovies(keyword) async {
+    return searchByKeyword(
+      keyword: keyword,
+    );
+  }
+
+  @override
   Future<MovieEvent> fetchMovies(endpoint) async {
     List<MovieModel> moviesList = [];
     int startIndex = endpoint.lastIndexOf('/');
@@ -33,18 +41,23 @@ class MoviesRepository with DatabaseResponse implements IMoviesRepository {
       try {
         var apiResponse = await _service.apiCall(endpoint: endpoint);
         if (apiResponse.statusCode == HttpStatus.ok) {
-          List<dynamic> movies = json.decode(apiResponse.body)['results'];
+          List<dynamic> movies = json
+              .decode(apiResponse.body)[StringConstants.responseResultField];
+
           if (movies.isEmpty) {
             return MovieEvent(status: Status.empty);
           } else {
-            _db.addMovie(
+            movies.forEach((movie) {
+              (movie as Map<String, dynamic>)[
+                      StringConstants.loweCaseTitleField] =
+                  (movie['title'] as String).toLowerCase();
+              moviesList.add(MovieModel.fromJson(movie));
+            });
+            _db.addMovies(
               movies: movies,
               mainCollectionDocument: document,
               subcollection: subcollection,
             );
-            movies.forEach((movie) {
-              moviesList.add(MovieModel.fromJson(movie));
-            });
             return MovieEvent(
               movies: moviesList,
               status: Status.success,

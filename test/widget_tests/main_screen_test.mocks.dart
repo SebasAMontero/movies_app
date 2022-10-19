@@ -62,4 +62,13 @@ class MockIMoviesBloc extends _i1.Mock implements _i2.IMoviesBloc {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> searchMovies(dynamic keyword) => (super.noSuchMethod(
+        Invocation.method(
+          #searchMovies,
+          [keyword],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }

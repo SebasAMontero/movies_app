@@ -26,7 +26,7 @@ class _UpcomingState extends State<Upcoming> {
     Provider.of<IMoviesBloc>(
       context,
       listen: false,
-    ).getMovies(ServiceConstants.endpoints[StringConstants.upcomingText]);
+    ).getMovies(ServiceConstants.endpoints[StringConstants.upcomingTabText]);
     super.initState();
   }
 
@@ -61,7 +61,8 @@ class _UpcomingState extends State<Upcoming> {
                         Dimensions.moviePosterSize,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.upcomingTextTopPadding),
+                        padding: const EdgeInsets.only(
+                            top: Dimensions.upcomingTextTopPadding),
                         child: Text(
                           snapshot.data!.movies![index].title,
                           style: const TextStyle(

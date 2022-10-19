@@ -18,6 +18,7 @@ void main() {
       posterPath: '/3bhkrj58Vtu7enYsRolD1fZdja1.jpg',
       releaseDate: '1972-03-14',
       title: 'The Godfather',
+      lowerCaseTitle: 'the godfather',
       video: false,
       voteAverage: 8.7,
       voteCount: 16756,

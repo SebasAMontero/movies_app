@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../core/util/dimensions.dart';
 import '../../core/util/palette.dart';
 import '../../core/util/service_constants.dart';
 import '../../core/util/string_constants.dart';
@@ -10,7 +8,7 @@ import '../../domain/entity/movie_event.dart';
 import '../bloc/interfaces/i_movies_bloc.dart';
 import '../widget/empty_widget.dart';
 import '../widget/error_widget.dart';
-import '../widget/show_image.dart';
+import '../widget/movie_list.dart';
 
 class TopRated extends StatefulWidget {
   const TopRated({Key? key}) : super(key: key);
@@ -49,45 +47,7 @@ class _TopRatedState extends State<TopRated> {
                 valueColor: AlwaysStoppedAnimation<Color>(Palette.primaryLight),
               );
             case Status.success:
-              return ListView.builder(
-                itemCount: snapshot.data!.movies!.length,
-                itemBuilder: (
-                  BuildContext context,
-                  int index,
-                ) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.all(Dimensions.movieContainerPadding),
-                    child: Container(
-                      color: Palette.containerColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(
-                          Dimensions.innerMovieContainerPadding,
-                        ),
-                        child: Row(
-                          children: [
-                            showImgIfExists(
-                              snapshot.data!.movies![index].posterPath,
-                              Dimensions.moviePosterSize,
-                            ),
-                            Expanded(
-                              child: AutoSizeText(
-                                snapshot.data!.movies![index].title,
-                                style: const TextStyle(
-                                  color: Palette.lightFontColor,
-                                  fontSize: Dimensions.movieTitleFontSize,
-                                ),
-                                textAlign: TextAlign.center,
-                                maxLines: Dimensions.movieTitleMaxLines,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
+              return buildMovieList(snapshot.data!.movies!);
             case Status.empty:
               return empty();
             case Status.error:

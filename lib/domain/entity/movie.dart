@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class Movie {
   final bool adult;
   final String backdropPath;
@@ -10,6 +12,7 @@ class Movie {
   final String posterPath;
   final String releaseDate;
   final String title;
+  final String lowerCaseTitle;
   final bool video;
   final double voteAverage;
   final int voteCount;
@@ -29,5 +32,14 @@ class Movie {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    required this.lowerCaseTitle,
   });
+
+  @override
+  bool operator ==(Object other) {
+    return other is Movie && title == other.title && id == other.id;
+  }
+
+  @override
+  int get hashCode => hashValues(id, title);
 }

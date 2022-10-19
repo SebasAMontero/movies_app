@@ -5,11 +5,13 @@ import 'package:http/http.dart' as http;
 
 import 'core/usecases/i_usecase.dart';
 import 'core/util/assets_constants.dart';
+import 'core/util/string_constants.dart';
 import 'data/datasource/local/DAOs/database.dart';
 import 'data/datasource/remote/api_service.dart';
 import 'data/repository/movies_repository_impl.dart';
 import 'domain/repository/i_movies_repository.dart';
 import 'domain/usecase/get_movies_usecase.dart';
+import 'domain/usecase/search_movies_usecase.dart';
 import 'presentation/bloc/connection_bloc.dart';
 import 'presentation/bloc/interfaces/i_connection_bloc.dart';
 import 'presentation/bloc/interfaces/i_movies_bloc.dart';
@@ -35,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late ApiService _service;
   late IMoviesRepository _moviesRepository;
   late Usecase _getMoviesUsecase;
+  late Usecase _searchMoviesUsecase;
   late IMoviesBloc _moviesBloc;
   late IConnectionBloc _connectionBloc;
 
@@ -50,7 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
       _connectionBloc,
     );
     _getMoviesUsecase = GetMoviesUsecase(_moviesRepository);
-    _moviesBloc = MoviesBloc(_getMoviesUsecase);
+    _searchMoviesUsecase = SearchMoviesUseCase(_moviesRepository);
+    _moviesBloc = MoviesBloc(
+      _getMoviesUsecase,
+      _searchMoviesUsecase,
+    );
     super.initState();
   }
 
@@ -67,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Provider<IMoviesBloc>.value(value: _moviesBloc),
       ],
       child: MaterialApp(
-        title: 'Movies App',
+        title: StringConstants.appName,
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xff4C3A51),
           fontFamily: AssetsConstants.appFont,

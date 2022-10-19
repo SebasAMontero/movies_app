@@ -25,7 +25,7 @@ class _NowPlayingState extends State<NowPlaying> {
     Provider.of<IMoviesBloc>(
       context,
       listen: false,
-    ).getMovies(ServiceConstants.endpoints[StringConstants.nowPlayingText]);
+    ).getMovies(ServiceConstants.endpoints[StringConstants.nowPlayingTabText]);
     super.initState();
   }
 
