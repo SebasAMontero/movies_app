@@ -8,4 +8,5 @@ abstract class IMoviesBloc implements Bloc {
   void dispose();
   Stream<MovieEvent> getStream();
   Future<void> getMovies(endpoint);
+  Future<void> searchMovies(keyword);
 }

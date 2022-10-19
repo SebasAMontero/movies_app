@@ -126,6 +126,18 @@ class MockDatabase extends _i1.Mock implements _i6.Database {
           ),
         )),
       ) as _i5.Future<_i3.QuerySnapshot<Object?>>);
+  @override
+  _i5.Future<List<_i3.QuerySnapshot<Object?>>> searchMovies(
+          {required String? keyword}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchMovies,
+          [],
+          {#keyword: keyword},
+        ),
+        returnValue: _i5.Future<List<_i3.QuerySnapshot<Object?>>>.value(
+            <_i3.QuerySnapshot<Object?>>[]),
+      ) as _i5.Future<List<_i3.QuerySnapshot<Object?>>>);
 }
 
 /// A class which mocks [IConnectionBloc].

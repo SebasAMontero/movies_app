@@ -53,4 +53,19 @@ class MockIMoviesRepository extends _i1.Mock implements _i3.IMoviesRepository {
           ),
         )),
       ) as _i4.Future<_i2.MovieEvent>);
+  @override
+  _i4.Future<_i2.MovieEvent> searchMovies(dynamic keyword) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchMovies,
+          [keyword],
+        ),
+        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+          this,
+          Invocation.method(
+            #searchMovies,
+            [keyword],
+          ),
+        )),
+      ) as _i4.Future<_i2.MovieEvent>);
 }

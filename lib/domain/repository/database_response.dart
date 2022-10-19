@@ -36,4 +36,39 @@ mixin DatabaseResponse {
       );
     }
   }
+
+  Future<MovieEvent> searchByKeyword({required String keyword}) async {
+    Set<MovieModel> moviesList = {};
+    try {
+      List<QuerySnapshot> dbResponse =
+          await database.searchMovies(keyword: keyword);
+      bool resultsAreEmpty = true;
+      dbResponse.forEach((collection) {
+        if (collection.docs.isNotEmpty) {
+          resultsAreEmpty = false;
+        }
+      });
+      if (resultsAreEmpty) {
+        return MovieEvent(status: Status.empty);
+      }
+      List<QueryDocumentSnapshot> movies = [];
+      dbResponse.forEach((searchResult) {
+        movies.addAll(searchResult.docs);
+      });
+      movies.forEach((movie) {
+        moviesList.add(
+          MovieModel.fromJson(movie),
+        );
+      });
+      return MovieEvent(
+        movies: moviesList.toList(),
+        status: Status.success,
+      );
+    } catch (e) {
+      return MovieEvent(
+        status: Status.error,
+        errorMessage: '$e',
+      );
+    }
+  }
 }

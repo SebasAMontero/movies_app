@@ -8,6 +8,7 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movies_app/domain/entity/movie_event.dart' as _i2;
 import 'package:movies_app/domain/usecase/get_movies_usecase.dart' as _i3;
+import 'package:movies_app/domain/usecase/search_movies_usecase.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -35,6 +36,33 @@ class _FakeMovieEvent_0 extends _i1.SmartFake implements _i2.MovieEvent {
 /// See the documentation for Mockito's code generation for more information.
 class MockGetMoviesUsecase extends _i1.Mock implements _i3.GetMoviesUsecase {
   MockGetMoviesUsecase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.MovieEvent> call({String? params}) => (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {#params: params},
+        ),
+        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {#params: params},
+          ),
+        )),
+      ) as _i4.Future<_i2.MovieEvent>);
+}
+
+/// A class which mocks [SearchMoviesUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSearchMoviesUseCase extends _i1.Mock
+    implements _i5.SearchMoviesUseCase {
+  MockSearchMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
 

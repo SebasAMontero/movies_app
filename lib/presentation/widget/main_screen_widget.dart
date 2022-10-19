@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../core/util/assets_constants.dart';
 import '../../core/util/constants.dart';
 import '../../core/util/keys.dart';
 import '../../core/util/palette.dart';
+import '../../core/util/string_constants.dart';
+import '../view/search_view.dart';
 import '../view/now_playing.dart';
 import '../view/top_rated.dart';
 import '../view/upcoming.dart';
@@ -44,7 +47,7 @@ class _MainScreenState extends State<MainScreenWidget>
                     size: Constants.appbarIconSize,
                   ),
                   Image.asset(
-                    Constants.logo,
+                    AssetsConstants.logo,
                     height: Constants.appbarLogoSize,
                     color: Palette.primary,
                   ),
@@ -54,14 +57,23 @@ class _MainScreenState extends State<MainScreenWidget>
             const Padding(
               padding: Constants.horizontalPadding,
               child: Text(
-                Constants.appName,
+                StringConstants.appName,
               ),
             ),
           ],
         ),
         actions: [
           IconButton(
-            onPressed: () => {},
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchView(
+                    tabActual: Constants.tabEndpoints[_tabController.index]!,
+                  ),
+                ),
+              )
+            },
             icon: const Icon(Icons.search),
           )
         ],
@@ -87,7 +99,7 @@ class _MainScreenState extends State<MainScreenWidget>
                   child: Column(
                     children: const [
                       Icon(Icons.play_arrow_outlined),
-                      Text(Constants.nowPlayingTabText),
+                      Text(StringConstants.nowPlayingTabText),
                     ],
                   ),
                 ),
@@ -95,7 +107,7 @@ class _MainScreenState extends State<MainScreenWidget>
                   child: Column(
                     children: const [
                       Icon(Icons.local_fire_department),
-                      Text(Constants.topRatedTabText),
+                      Text(StringConstants.topRatedTabText),
                     ],
                   ),
                 ),
@@ -103,7 +115,7 @@ class _MainScreenState extends State<MainScreenWidget>
                   child: Column(
                     children: const [
                       Icon(Icons.upcoming),
-                      Text(Constants.upcomingTabText),
+                      Text(StringConstants.upcomingTabText),
                     ],
                   ),
                 ),
