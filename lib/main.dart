@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'core/usecases/i_usecase.dart';
+import 'core/util/assets_constants.dart';
 import 'data/datasource/local/DAOs/database.dart';
 import 'data/datasource/remote/api_service.dart';
 import 'data/repository/movies_repository_impl.dart';
@@ -70,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: 'Movies App',
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xff4C3A51),
+          fontFamily: AssetsConstants.appFont,
         ),
         home: const SplashScreen(),
       ),

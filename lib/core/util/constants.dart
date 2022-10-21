@@ -24,4 +24,7 @@ abstract class Constants {
   static const String notFoundMessage = 'Nothing found';
   static const double notFoundFontSize = 20;
   static const String logo = 'assets/images/clapperboard.webp';
+  static const bool carouselAutoPlay = true;
+  static const bool carouselInfiniteScroll = false;
+  static const bool carouselEnlargeCenterPage = true;
 }

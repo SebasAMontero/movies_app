@@ -4,6 +4,7 @@ import '../../core/util/constants.dart';
 import '../../core/util/keys.dart';
 import '../../core/util/palette.dart';
 import '../view/top_rated.dart';
+import '../view/upcoming.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -138,26 +139,8 @@ class _MainScreenState extends State<MainScreenWidget>
                   const TopRated(
                     key: Keys.topRatedKey,
                   ),
-                  Column(
+                  const Upcoming(
                     key: Keys.upcomingKey,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.do_not_disturb_off_outlined,
-                        size: Constants.notFoundIconSize,
-                        color: Palette.primaryLight,
-                      ),
-                      Padding(
-                        padding: Constants.topSmallPadding,
-                        child: Text(
-                          Constants.notFoundMessage,
-                          style: TextStyle(
-                            color: Palette.primaryLight,
-                            fontSize: Constants.notFoundFontSize,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

@@ -13,4 +13,6 @@ abstract class Dimensions {
   static const double kSplashScreenIconSize = 800.0;
   static const int kSplashScreenAnimationDuration = 4;
   static const double assetImageDimension = 150;
+  static const double upcomingTitleFontSize = 30;
+  static const double carouselViewportFraction = 0.75;
 }

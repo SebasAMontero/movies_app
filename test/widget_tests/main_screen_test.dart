@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
-import 'package:movies_app/core/util/constants.dart';
 import 'package:movies_app/core/util/keys.dart';
 import 'package:movies_app/core/util/service_constants.dart';
 import 'package:movies_app/data/model/movie_model.dart';
@@ -20,12 +19,13 @@ import 'main_screen_test.mocks.dart';
 @GenerateMocks([IMoviesBloc])
 void main() {
   IMoviesBloc bloc = MockIMoviesBloc();
-  StreamController<MovieEvent> streamController = StreamController();
+  StreamController<MovieEvent> streamController =
+      StreamController<MovieEvent>.broadcast();
   MovieEvent movieEvent = MovieEvent(
     movies: [MovieModel.fromJson(moviesJson)],
     status: Status.success,
   );
-  final String? endpoint = ServiceConstants.endpoints['Top Rated'];
+  final String? endpointTopRated = ServiceConstants.endpoints['Top Rated'];
 
   tearDown(() {
     bloc.dispose();
@@ -47,7 +47,7 @@ void main() {
       when(bloc.getStream()).thenAnswer((_) {
         return streamController.stream;
       });
-      when(bloc.getMovies(endpoint)).thenAnswer((_) async {
+      when(bloc.getMovies(endpointTopRated)).thenAnswer((_) async {
         streamController.sink.add(movieEvent);
       });
       await widgetTester.pumpWidget(_buildWidget());
@@ -76,13 +76,6 @@ void main() {
         find.text('The Godfather'),
         findsOneWidget,
       );
-
-      await widgetTester.tap(
-        find.text(Constants.upcomingTabText),
-      );
-      await widgetTester.pumpAndSettle();
-      expect(find.byKey(Keys.topRatedKey), findsNothing);
-      expect(find.byKey(Keys.upcomingKey), findsOneWidget);
     });
   });
 }

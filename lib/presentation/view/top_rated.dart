@@ -22,8 +22,10 @@ class TopRated extends StatefulWidget {
 class _TopRatedState extends State<TopRated> {
   @override
   void initState() {
-    Provider.of<IMoviesBloc>(context, listen: false)
-        .getMovies(ServiceConstants.endpoints[StringConstants.topRatedKey]);
+    Provider.of<IMoviesBloc>(
+      context,
+      listen: false,
+    ).getMovies(ServiceConstants.endpoints[StringConstants.topRatedKey]);
     super.initState();
   }
 
