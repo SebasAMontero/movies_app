@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../domain/entity/movie_event.dart';
 import '../../domain/repository/database_response.dart';
