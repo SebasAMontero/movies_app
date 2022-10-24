@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
+import 'package:movies_app/core/util/status_enum.dart';
 import 'package:movies_app/data/model/movie_model.dart';
 import 'package:movies_app/domain/entity/movie_event.dart';
 import 'package:movies_app/presentation/bloc/interfaces/i_movies_bloc.dart';

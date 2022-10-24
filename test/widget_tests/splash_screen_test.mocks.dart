@@ -3,13 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:flutter/src/widgets/navigator.dart' as _i2;
+import 'package:flutter/src/widgets/navigator.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:movies_app/domain/entity/movie_event.dart' as _i5;
+import 'package:movies_app/data/model/movie_model.dart' as _i7;
+import 'package:movies_app/domain/entity/movie_detail_event.dart' as _i2;
+import 'package:movies_app/domain/entity/movie_event.dart' as _i6;
 import 'package:movies_app/presentation/bloc/interfaces/i_movies_bloc.dart'
-    as _i3;
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,14 +24,25 @@ import 'package:movies_app/presentation/bloc/interfaces/i_movies_bloc.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeMovieDetailEvent_0 extends _i1.SmartFake
+    implements _i2.MovieDetailEvent {
+  _FakeMovieDetailEvent_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i3.NavigatorObserver {
   @override
   void didPush(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -43,8 +56,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didPop(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -58,8 +71,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didRemove(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -73,8 +86,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didReplace({
-    _i2.Route<dynamic>? newRoute,
-    _i2.Route<dynamic>? oldRoute,
+    _i3.Route<dynamic>? newRoute,
+    _i3.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -89,8 +102,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
       );
   @override
   void didStartUserGesture(
-    _i2.Route<dynamic>? route,
-    _i2.Route<dynamic>? previousRoute,
+    _i3.Route<dynamic>? route,
+    _i3.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -115,7 +128,7 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
 /// A class which mocks [IMoviesBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMoviesBloc extends _i1.Mock implements _i3.IMoviesBloc {
+class MockIMoviesBloc extends _i1.Mock implements _i4.IMoviesBloc {
   MockIMoviesBloc() {
     _i1.throwOnMissingStub(this);
   }
@@ -137,20 +150,45 @@ class MockIMoviesBloc extends _i1.Mock implements _i3.IMoviesBloc {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Stream<_i5.MovieEvent> getStream() => (super.noSuchMethod(
+  _i5.Stream<_i6.MovieEvent> getStream() => (super.noSuchMethod(
         Invocation.method(
           #getStream,
           [],
         ),
-        returnValue: _i4.Stream<_i5.MovieEvent>.empty(),
-      ) as _i4.Stream<_i5.MovieEvent>);
+        returnValue: _i5.Stream<_i6.MovieEvent>.empty(),
+      ) as _i5.Stream<_i6.MovieEvent>);
   @override
-  _i4.Future<void> getMovies(dynamic endpoint) => (super.noSuchMethod(
+  _i5.Future<void> getMovies(dynamic endpoint) => (super.noSuchMethod(
         Invocation.method(
           #getMovies,
           [endpoint],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<_i2.MovieDetailEvent> getSpecificMovie(_i7.MovieModel? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getSpecificMovie,
+          [movie],
+        ),
+        returnValue:
+            _i5.Future<_i2.MovieDetailEvent>.value(_FakeMovieDetailEvent_0(
+          this,
+          Invocation.method(
+            #getSpecificMovie,
+            [movie],
+          ),
+        )),
+      ) as _i5.Future<_i2.MovieDetailEvent>);
+  @override
+  _i5.Future<void> searchMovies(dynamic keyword) => (super.noSuchMethod(
+        Invocation.method(
+          #searchMovies,
+          [keyword],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

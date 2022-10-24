@@ -38,4 +38,6 @@ abstract class Constants {
     1: '/movie/top_rated',
     2: '/movie/upcoming',
   };
+  static const double collectionOpacityStart = 0.8;
+  static const double collectionOpacityEnd = 0.2;
 }

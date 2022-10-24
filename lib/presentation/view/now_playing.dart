@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/util/status_enum.dart';
 import '../../core/util/dimensions.dart';
 import '../../core/util/palette.dart';
 import '../../core/util/service_constants.dart';
@@ -11,6 +12,7 @@ import '../bloc/interfaces/i_movies_bloc.dart';
 import '../widget/empty_widget.dart';
 import '../widget/error_widget.dart';
 import '../widget/show_image.dart';
+import 'movie_detail_screen.dart';
 
 class NowPlaying extends StatefulWidget {
   const NowPlaying({Key? key}) : super(key: key);
@@ -60,41 +62,56 @@ class _NowPlayingState extends State<NowPlaying> {
                     BuildContext context,
                     int index,
                   ) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          Dimensions.nowPlayingGridContainerBorderRadius,
-                        ),
-                        color: Palette.containerColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          showImgIfExists(
-                            snapshot.data!.movies![index].posterPath,
-                            Dimensions.moviePosterSizeNowPlaying,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (
+                              BuildContext context,
+                            ) =>
+                                MovieDetailScreen(
+                              movie: snapshot.data!.movies![index],
+                            ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(
-                                Dimensions.nowPlayingTextPadding,
-                              ),
-                              child: Center(
-                                child: AutoSizeText(
-                                  snapshot.data!.movies![index].title,
-                                  style: const TextStyle(
-                                    fontSize:
-                                        Dimensions.nowPlayingTitleFontSize,
-                                    color: Palette.lightFontColor,
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.nowPlayingGridContainerBorderRadius,
+                          ),
+                          color: Palette.containerColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            showImgIfExists(
+                              snapshot.data!.movies![index].posterPath,
+                              Dimensions.moviePosterSizeNowPlaying,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(
+                                  Dimensions.nowPlayingTextPadding,
+                                ),
+                                child: Center(
+                                  child: AutoSizeText(
+                                    snapshot.data!.movies![index].title,
+                                    style: const TextStyle(
+                                      fontSize:
+                                          Dimensions.nowPlayingTitleFontSize,
+                                      color: Palette.lightFontColor,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: Dimensions.nowPlayingTextMaxLines,
                                   ),
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: Dimensions.nowPlayingTextMaxLines,
                                 ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },

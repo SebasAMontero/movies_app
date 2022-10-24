@@ -10,7 +10,21 @@ class ApiService {
 
   Future<http.Response> apiCall({endpoint}) async {
     Uri uri;
-    uri = Uri.parse('${ServiceConstants.baseUrl}$endpoint');
+    uri = Uri.parse(
+      '${ServiceConstants.baseUrl}$endpoint',
+    );
+    var response = await _client.get(
+      uri,
+      headers: ServiceConstants.headers,
+    );
+    return response;
+  }
+
+  Future<http.Response> apiCallMovieId({id}) async {
+    Uri uri;
+    uri = Uri.parse(
+      '${ServiceConstants.baseUrl}${ServiceConstants.movieUrl}$id',
+    );
     var response = await _client.get(
       uri,
       headers: ServiceConstants.headers,

@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movies_app/domain/entity/movie.dart';
 
 void main() {
-  late Movie movie;
+  late   Movie movie;
 
   setUp(() {
-    movie = Movie(
+    movie =  Movie(
       adult: false,
       backdropPath: '/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg',
       genreIds: [18, 80],

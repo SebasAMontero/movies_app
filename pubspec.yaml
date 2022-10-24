@@ -48,7 +48,8 @@ dependencies:
   mocktail_image_network: ^0.3.1
   firebase_core: ^1.24.0
   carousel_slider: ^4.1.1
-
+  firebase_core_platform_interface: 4.5.1
+  firebase_messaging: ^13.0.4 # will satisfy your firebase core things that depend on ^4.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

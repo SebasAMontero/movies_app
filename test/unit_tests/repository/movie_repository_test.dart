@@ -7,7 +7,9 @@ import 'package:mockito/mockito.dart';
 import 'package:movies_app/core/util/service_constants.dart';
 import 'package:movies_app/data/datasource/local/DAOs/database.dart';
 import 'package:movies_app/data/datasource/remote/api_service.dart';
+import 'package:movies_app/data/model/movie_model.dart';
 import 'package:movies_app/data/repository/movies_repository_impl.dart';
+import 'package:movies_app/domain/entity/movie_detail_event.dart';
 import 'package:movies_app/domain/entity/movie_event.dart';
 import 'package:movies_app/domain/repository/i_movies_repository.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +25,7 @@ void main() {
   late Database database;
   late IConnectionBloc connectionBloc;
   final String? endpoint = ServiceConstants.endpoints['Top Rated'];
+  final MovieModel movieModel = MovieModel.fromJson(moviesJson);
 
   setUpAll(() {
     service = MockApiService();
@@ -36,7 +39,7 @@ void main() {
   });
 
   group('Movies Repository Unit Testing', () {
-    test('Test CardRepository fetchMovies', () async {
+    test('Test MoviesRepository fetchMovies', () async {
       when(
         service.apiCall(
           endpoint: endpoint,
@@ -57,6 +60,27 @@ void main() {
         isA<MovieEvent>(),
       );
     });
+    test('Test MoviesRepository fetchMovieDetail', () async {
+      when(
+        service.apiCallMovieId(
+          id: movieDetailId,
+        ),
+      ).thenAnswer((_) async {
+        return http.Response(
+          jsonEncode(movieDetailJson),
+          HttpStatus.ok,
+        );
+      });
+      when(connectionBloc.isOnline).thenAnswer((_) {
+        return true;
+      });
+      expect(
+        await moviesRepository.fetchMovieDetail(
+          movieModel,
+        ),
+        isA<MovieDetailEvent>(),
+      );
+    });
 
     test('Test MoviesRepository empty json', () async {
       when(service.apiCall(endpoint: endpoint)).thenAnswer((_) async {
@@ -73,6 +97,27 @@ void main() {
           endpoint,
         ),
         isA<MovieEvent>(),
+      );
+    });
+    test('Test fetchMovieDetail with empty json', () async {
+      when(
+        service.apiCallMovieId(
+          id: movieDetailId,
+        ),
+      ).thenAnswer((_) async {
+        return http.Response(
+          jsonEncode({}),
+          HttpStatus.ok,
+        );
+      });
+      when(connectionBloc.isOnline).thenAnswer((_) {
+        return true;
+      });
+      expect(
+        await moviesRepository.fetchMovieDetail(
+          movieModel,
+        ),
+        isA<MovieDetailEvent>(),
       );
     });
 
@@ -110,6 +155,24 @@ void main() {
         isA<MovieEvent>(),
       );
     });
+    test('Test fetchMovieDetail no internet connection', () async {
+      when(
+        service.apiCallMovieId(
+          id: movieDetailId,
+        ),
+      ).thenAnswer((_) async {
+        return http.Response('', HttpStatus.badGateway);
+      });
+      when(connectionBloc.isOnline).thenAnswer((_) {
+        return true;
+      });
+      expect(
+        await moviesRepository.fetchMovieDetail(
+          movieModel,
+        ),
+        isA<MovieDetailEvent>(),
+      );
+    });
 
     test('Test MoviesRepository bad request', () async {
       when(
@@ -127,6 +190,24 @@ void main() {
           endpoint,
         ),
         isA<MovieEvent>(),
+      );
+    });
+    test('Test fetchMovieDetail bad request', () async {
+      when(
+        service.apiCallMovieId(
+          id: movieDetailId,
+        ),
+      ).thenAnswer((_) async {
+        return http.Response('', HttpStatus.badGateway);
+      });
+      when(connectionBloc.isOnline).thenAnswer((_) {
+        return true;
+      });
+      expect(
+        await moviesRepository.fetchMovieDetail(
+          movieModel,
+        ),
+        isA<MovieDetailEvent>(),
       );
     });
   });

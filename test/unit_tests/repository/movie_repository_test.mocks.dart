@@ -46,6 +46,17 @@ class _FakeQuerySnapshot_1<T extends Object?> extends _i1.SmartFake
         );
 }
 
+class _FakeDocumentSnapshot_2<T extends Object?> extends _i1.SmartFake
+    implements _i3.DocumentSnapshot<T> {
+  _FakeDocumentSnapshot_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [ApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -70,6 +81,22 @@ class MockApiService extends _i1.Mock implements _i4.ApiService {
           ),
         )),
       ) as _i5.Future<_i2.Response>);
+  @override
+  _i5.Future<_i2.Response> apiCallMovieId({dynamic id}) => (super.noSuchMethod(
+        Invocation.method(
+          #apiCallMovieId,
+          [],
+          {#id: id},
+        ),
+        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_0(
+          this,
+          Invocation.method(
+            #apiCallMovieId,
+            [],
+            {#id: id},
+          ),
+        )),
+      ) as _i5.Future<_i2.Response>);
 }
 
 /// A class which mocks [Database].
@@ -81,20 +108,31 @@ class MockDatabase extends _i1.Mock implements _i6.Database {
   }
 
   @override
-  _i5.Future<void> addMovie({
+  _i5.Future<void> addMovies({
     required List<dynamic>? movies,
     required String? mainCollectionDocument,
-    required String? subcollection,
+    required String? subCollection,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #addMovie,
+          #addMovies,
           [],
           {
             #movies: movies,
             #mainCollectionDocument: mainCollectionDocument,
-            #subcollection: subcollection,
+            #subCollection: subCollection,
           },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+  @override
+  _i5.Future<void> addMovieDetail({required Map<String, dynamic>? movie}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addMovieDetail,
+          [],
+          {#movie: movie},
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
@@ -102,7 +140,7 @@ class MockDatabase extends _i1.Mock implements _i6.Database {
   @override
   _i5.Future<_i3.QuerySnapshot<Object?>> readMovies({
     required String? mainCollectionDocument,
-    required String? subcollection,
+    required String? subCollection,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -110,7 +148,7 @@ class MockDatabase extends _i1.Mock implements _i6.Database {
           [],
           {
             #mainCollectionDocument: mainCollectionDocument,
-            #subcollection: subcollection,
+            #subCollection: subCollection,
           },
         ),
         returnValue: _i5.Future<_i3.QuerySnapshot<Object?>>.value(
@@ -121,7 +159,65 @@ class MockDatabase extends _i1.Mock implements _i6.Database {
             [],
             {
               #mainCollectionDocument: mainCollectionDocument,
-              #subcollection: subcollection,
+              #subCollection: subCollection,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.QuerySnapshot<Object?>>);
+  @override
+  _i5.Future<_i3.DocumentSnapshot<Object?>> readMovieDetail(
+          {required String? id}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readMovieDetail,
+          [],
+          {#id: id},
+        ),
+        returnValue: _i5.Future<_i3.DocumentSnapshot<Object?>>.value(
+            _FakeDocumentSnapshot_2<Object?>(
+          this,
+          Invocation.method(
+            #readMovieDetail,
+            [],
+            {#id: id},
+          ),
+        )),
+      ) as _i5.Future<_i3.DocumentSnapshot<Object?>>);
+  @override
+  _i5.Future<List<_i3.QuerySnapshot<Object?>>> searchMovies(
+          {required String? keyword}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchMovies,
+          [],
+          {#keyword: keyword},
+        ),
+        returnValue: _i5.Future<List<_i3.QuerySnapshot<Object?>>>.value(
+            <_i3.QuerySnapshot<Object?>>[]),
+      ) as _i5.Future<List<_i3.QuerySnapshot<Object?>>>);
+  @override
+  _i5.Future<_i3.QuerySnapshot<Object?>> searchInCollection({
+    required String? collection,
+    required String? keyword,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchInCollection,
+          [],
+          {
+            #collection: collection,
+            #keyword: keyword,
+          },
+        ),
+        returnValue: _i5.Future<_i3.QuerySnapshot<Object?>>.value(
+            _FakeQuerySnapshot_1<Object?>(
+          this,
+          Invocation.method(
+            #searchInCollection,
+            [],
+            {
+              #collection: collection,
+              #keyword: keyword,
             },
           ),
         )),

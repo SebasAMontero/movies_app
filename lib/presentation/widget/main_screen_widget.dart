@@ -140,7 +140,7 @@ class _MainScreenState extends State<MainScreenWidget>
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );

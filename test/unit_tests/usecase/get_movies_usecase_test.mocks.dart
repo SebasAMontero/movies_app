@@ -3,11 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:movies_app/data/model/movie_model.dart' as _i6;
+import 'package:movies_app/domain/entity/movie_detail_event.dart' as _i3;
 import 'package:movies_app/domain/entity/movie_event.dart' as _i2;
-import 'package:movies_app/domain/repository/i_movies_repository.dart' as _i3;
+import 'package:movies_app/domain/repository/i_movies_repository.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,42 +32,69 @@ class _FakeMovieEvent_0 extends _i1.SmartFake implements _i2.MovieEvent {
         );
 }
 
+class _FakeMovieDetailEvent_1 extends _i1.SmartFake
+    implements _i3.MovieDetailEvent {
+  _FakeMovieDetailEvent_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [IMoviesRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMoviesRepository extends _i1.Mock implements _i3.IMoviesRepository {
+class MockIMoviesRepository extends _i1.Mock implements _i4.IMoviesRepository {
   MockIMoviesRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.MovieEvent> fetchMovies(dynamic endpoint) =>
+  _i5.Future<_i2.MovieEvent> fetchMovies(dynamic endpoint) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchMovies,
           [endpoint],
         ),
-        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+        returnValue: _i5.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
           this,
           Invocation.method(
             #fetchMovies,
             [endpoint],
           ),
         )),
-      ) as _i4.Future<_i2.MovieEvent>);
+      ) as _i5.Future<_i2.MovieEvent>);
   @override
-  _i4.Future<_i2.MovieEvent> searchMovies(dynamic keyword) =>
+  _i5.Future<_i3.MovieDetailEvent> fetchMovieDetail(_i6.MovieModel? movie) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchMovieDetail,
+          [movie],
+        ),
+        returnValue:
+            _i5.Future<_i3.MovieDetailEvent>.value(_FakeMovieDetailEvent_1(
+          this,
+          Invocation.method(
+            #fetchMovieDetail,
+            [movie],
+          ),
+        )),
+      ) as _i5.Future<_i3.MovieDetailEvent>);
+  @override
+  _i5.Future<_i2.MovieEvent> searchMovies(dynamic keyword) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchMovies,
           [keyword],
         ),
-        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+        returnValue: _i5.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
           this,
           Invocation.method(
             #searchMovies,
             [keyword],
           ),
         )),
-      ) as _i4.Future<_i2.MovieEvent>);
+      ) as _i5.Future<_i2.MovieEvent>);
 }

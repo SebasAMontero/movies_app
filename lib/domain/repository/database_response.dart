@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../core/util/status_enum.dart';
 import '../../data/datasource/local/DAOs/database.dart';
+import '../../data/model/movie_detail_model.dart';
 import '../../data/model/movie_model.dart';
+import '../entity/movie_detail_event.dart';
 import '../entity/movie_event.dart';
 
 mixin DatabaseResponse {
@@ -9,13 +12,13 @@ mixin DatabaseResponse {
 
   Future<MovieEvent> getMoviesFromDatabase({
     required String document,
-    required String subcollection,
+    required String subCollection,
   }) async {
     List<MovieModel> moviesList = [];
     try {
       QuerySnapshot dbResponse = await database.readMovies(
         mainCollectionDocument: document,
-        subcollection: subcollection,
+        subCollection: subCollection,
       );
       if (dbResponse.docs.isEmpty) {
         return MovieEvent(status: Status.empty);
@@ -33,6 +36,32 @@ mixin DatabaseResponse {
       return MovieEvent(
         status: Status.error,
         errorMessage: '$e',
+      );
+    }
+  }
+
+  Future<MovieDetailEvent> getMovieDetailFromDatabase({
+    required MovieModel movie,
+  }) async {
+    late MovieDetailModel movieDetail;
+    try {
+      DocumentSnapshot dbResponse = await database.readMovieDetail(
+        id: movie.id.toString(),
+      );
+
+      Map<String, dynamic> movieResponse =
+          dbResponse.data() as Map<String, dynamic>;
+
+      movieDetail = MovieDetailModel.fromJson(movieResponse);
+
+      return MovieDetailEvent(
+        movie: movieDetail,
+        status: Status.success,
+      );
+    } catch (e) {
+      return MovieDetailEvent(
+        status: Status.success,
+        movie: MovieDetailModel.fromModel(movie),
       );
     }
   }
