@@ -4,4 +4,5 @@ abstract class StringConstants {
   static const String notFoundMessage = 'Nothing found';
   static const String topRatedKey = 'Top Rated';
   static const String upcomingText = 'Upcoming';
+  static const String nowPlayingText = 'Now Playing';
 }

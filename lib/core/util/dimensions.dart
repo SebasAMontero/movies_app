@@ -15,4 +15,18 @@ abstract class Dimensions {
   static const double assetImageDimension = 150;
   static const double upcomingTitleFontSize = 30;
   static const double carouselViewportFraction = 0.75;
+  static const int numberOfGridColumns = 3;
+  static const double moviePosterSizeNowPlaying = 200;
+  static const double nowPlayingTitleFontSize = 20;
+  static const double nowPlayingGridPadding = 10;
+  static const double nowPlayingGridAspectRatio = 0.4;
+  static const double nowPlayingGridMainAxisSpacing = 10;
+  static const double nowPlayingGridCrossAxisSpacing = 10;
+  static const double nowPlayingGridContainerBorderRadius = 10;
+  static const double posterImageBorderRadius = 10;
+  static const double nowPlayingTextPadding = 8;
+  static const int nowPlayingTextMaxLines = 3;
+  static const double loaderBoxHeight = 200;
+  static const double loaderBoxWidth = 100;
+  static const double upcomingTextTopPadding = 10;
 }

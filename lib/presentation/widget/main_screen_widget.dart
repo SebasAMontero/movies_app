@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/util/constants.dart';
 import '../../core/util/keys.dart';
 import '../../core/util/palette.dart';
+import '../view/now_playing.dart';
 import '../view/top_rated.dart';
 import '../view/upcoming.dart';
 
@@ -114,32 +115,14 @@ class _MainScreenState extends State<MainScreenWidget>
               decoration: const BoxDecoration(color: Palette.primary),
               child: TabBarView(
                 controller: _tabController,
-                children: <Widget>[
-                  Column(
+                children: const <Widget>[
+                  NowPlaying(
                     key: Keys.nowPlayingKey,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.do_not_disturb_off_outlined,
-                        size: Constants.notFoundIconSize,
-                        color: Palette.primaryLight,
-                      ),
-                      Padding(
-                        padding: Constants.topSmallPadding,
-                        child: Text(
-                          Constants.notFoundMessage,
-                          style: TextStyle(
-                            color: Palette.primaryLight,
-                            fontSize: Constants.notFoundFontSize,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                  const TopRated(
+                  TopRated(
                     key: Keys.topRatedKey,
                   ),
-                  const Upcoming(
+                  Upcoming(
                     key: Keys.upcomingKey,
                   ),
                 ],
