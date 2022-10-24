@@ -41,7 +41,7 @@ void main() {
   }
 
   testWidgets(
-      'Main screen widget should have 3 tabs and a content container for each tab, tapping and dragging should change the current tab',
+      'Main screen widget should have 3 tabs and render the information of the first tab (Now Playing)',
       (widgetTester) async {
     mockNetworkImages(() async {
       when(bloc.getStream()).thenAnswer((_) {
@@ -57,15 +57,6 @@ void main() {
       expect(find.byKey(Keys.nowPlayingKey), findsOneWidget);
       expect(find.byKey(Keys.topRatedKey), findsNothing);
 
-      await widgetTester.drag(
-        find.byKey(Keys.nowPlayingKey),
-        const Offset(
-          -500,
-          0,
-        ),
-      );
-
-      await widgetTester.pump();
       streamController.sink.add(movieEvent);
       await widgetTester.pump();
       expect(

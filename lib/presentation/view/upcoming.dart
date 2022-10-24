@@ -60,13 +60,16 @@ class _UpcomingState extends State<Upcoming> {
                         snapshot.data!.movies![index].posterPath,
                         Dimensions.moviePosterSize,
                       ),
-                      Text(
-                        snapshot.data!.movies![index].title,
-                        style: const TextStyle(
-                          fontSize: Dimensions.upcomingTitleFontSize,
-                          color: Palette.lightFontColor,
+                      Padding(
+                        padding: const EdgeInsets.only(top: Dimensions.upcomingTextTopPadding),
+                        child: Text(
+                          snapshot.data!.movies![index].title,
+                          style: const TextStyle(
+                            fontSize: Dimensions.upcomingTitleFontSize,
+                            color: Palette.lightFontColor,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       )
                     ],
                   );

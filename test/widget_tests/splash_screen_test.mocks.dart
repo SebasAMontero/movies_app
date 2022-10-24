@@ -3,8 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i4;
+
 import 'package:flutter/src/widgets/navigator.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:movies_app/domain/entity/movie_event.dart' as _i5;
+import 'package:movies_app/presentation/bloc/interfaces/i_movies_bloc.dart'
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -105,4 +110,47 @@ class MockNavigatorObserver extends _i1.Mock implements _i2.NavigatorObserver {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [IMoviesBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIMoviesBloc extends _i1.Mock implements _i3.IMoviesBloc {
+  MockIMoviesBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void initialize() => super.noSuchMethod(
+        Invocation.method(
+          #initialize,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Stream<_i5.MovieEvent> getStream() => (super.noSuchMethod(
+        Invocation.method(
+          #getStream,
+          [],
+        ),
+        returnValue: _i4.Stream<_i5.MovieEvent>.empty(),
+      ) as _i4.Stream<_i5.MovieEvent>);
+  @override
+  _i4.Future<void> getMovies(dynamic endpoint) => (super.noSuchMethod(
+        Invocation.method(
+          #getMovies,
+          [endpoint],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

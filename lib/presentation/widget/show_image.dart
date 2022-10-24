@@ -9,15 +9,20 @@ import '../../core/util/service_constants.dart';
 Widget showImgIfExists(String img, double height) {
   return CachedNetworkImage(
     imageUrl: '${ServiceConstants.imagePath}$img',
-    imageBuilder: (BuildContext context, ImageProvider img) {
+    imageBuilder: (
+      BuildContext context,
+      ImageProvider img,
+    ) {
       return Container(
         height: height,
-        width: MediaQuery.of(context).size.width*0.5,
+        width: MediaQuery.of(context).size.width * 0.5,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
             image: img,
           ),
+          borderRadius:
+              BorderRadius.circular(Dimensions.posterImageBorderRadius),
           shape: BoxShape.rectangle,
         ),
       );
@@ -27,12 +32,16 @@ Widget showImgIfExists(String img, double height) {
       url,
       downloadProgress,
     ) =>
-        Center(
-      child: CircularProgressIndicator(
-        value: downloadProgress.progress,
-        valueColor: const AlwaysStoppedAnimation<Color>(Palette.primaryLight),
-      ),
-    ),
+        SizedBox(
+          height: Dimensions.loaderBoxHeight,
+          width: Dimensions.loaderBoxWidth,
+          child: Center(
+            child: CircularProgressIndicator(
+          value: downloadProgress.progress,
+          valueColor: const AlwaysStoppedAnimation<Color>(Palette.primaryLight),
+        ),
+          ),
+        ),
     errorWidget: (
       context,
       url,
