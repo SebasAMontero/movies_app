@@ -3,12 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:movies_app/data/model/movie_model.dart' as _i7;
+import 'package:movies_app/domain/entity/movie_detail_event.dart' as _i3;
 import 'package:movies_app/domain/entity/movie_event.dart' as _i2;
-import 'package:movies_app/domain/usecase/get_movies_usecase.dart' as _i3;
-import 'package:movies_app/domain/usecase/search_movies_usecase.dart' as _i5;
+import 'package:movies_app/domain/usecase/get_movie_detail_usecase.dart' as _i6;
+import 'package:movies_app/domain/usecase/get_movies_usecase.dart' as _i4;
+import 'package:movies_app/domain/usecase/search_movies_usecase.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -31,22 +34,33 @@ class _FakeMovieEvent_0 extends _i1.SmartFake implements _i2.MovieEvent {
         );
 }
 
-/// A class which mocks [GetMoviesUsecase].
+class _FakeMovieDetailEvent_1 extends _i1.SmartFake
+    implements _i3.MovieDetailEvent {
+  _FakeMovieDetailEvent_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [GetMoviesUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetMoviesUsecase extends _i1.Mock implements _i3.GetMoviesUsecase {
-  MockGetMoviesUsecase() {
+class MockGetMoviesUseCase extends _i1.Mock implements _i4.GetMoviesUseCase {
+  MockGetMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.MovieEvent> call({String? params}) => (super.noSuchMethod(
+  _i5.Future<_i2.MovieEvent> call({String? params}) => (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
           {#params: params},
         ),
-        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+        returnValue: _i5.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
           this,
           Invocation.method(
             #call,
@@ -54,26 +68,55 @@ class MockGetMoviesUsecase extends _i1.Mock implements _i3.GetMoviesUsecase {
             {#params: params},
           ),
         )),
-      ) as _i4.Future<_i2.MovieEvent>);
+      ) as _i5.Future<_i2.MovieEvent>);
+}
+
+/// A class which mocks [GetMovieDetailUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetMovieDetailUseCase extends _i1.Mock
+    implements _i6.GetMovieDetailUseCase {
+  MockGetMovieDetailUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.MovieDetailEvent> call({_i7.MovieModel? params}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {#params: params},
+        ),
+        returnValue:
+            _i5.Future<_i3.MovieDetailEvent>.value(_FakeMovieDetailEvent_1(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {#params: params},
+          ),
+        )),
+      ) as _i5.Future<_i3.MovieDetailEvent>);
 }
 
 /// A class which mocks [SearchMoviesUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSearchMoviesUseCase extends _i1.Mock
-    implements _i5.SearchMoviesUseCase {
+    implements _i8.SearchMoviesUseCase {
   MockSearchMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.MovieEvent> call({String? params}) => (super.noSuchMethod(
+  _i5.Future<_i2.MovieEvent> call({String? params}) => (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
           {#params: params},
         ),
-        returnValue: _i4.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
+        returnValue: _i5.Future<_i2.MovieEvent>.value(_FakeMovieEvent_0(
           this,
           Invocation.method(
             #call,
@@ -81,5 +124,5 @@ class MockSearchMoviesUseCase extends _i1.Mock
             {#params: params},
           ),
         )),
-      ) as _i4.Future<_i2.MovieEvent>);
+      ) as _i5.Future<_i2.MovieEvent>);
 }

@@ -1,15 +1,22 @@
 import 'dart:async';
 
 import '../../core/usecases/i_usecase.dart';
+
+import '../../core/util/status_enum.dart';
+
+import '../../domain/entity/movie_detail_event.dart';
 import '../../domain/entity/movie_event.dart';
 import 'interfaces/i_movies_bloc.dart';
 
 class MoviesBloc implements IMoviesBloc {
-  final Usecase _getMoviesUsecase;
-  final Usecase _searchMoviesUsecase;
+  final UseCase _getMoviesUseCase;
+  final UseCase _getMovieDetailUseCase;
+
+  final UseCase _searchMoviesUsecase;
 
   MoviesBloc(
-    this._getMoviesUsecase,
+    this._getMoviesUseCase,
+    this._getMovieDetailUseCase,
     this._searchMoviesUsecase,
   );
 
@@ -21,7 +28,9 @@ class MoviesBloc implements IMoviesBloc {
 
   @override
   void initialize() {
-    _moviesStreamController.sink.add(MovieEvent(status: Status.initial));
+    _moviesStreamController.sink.add(
+      MovieEvent(status: Status.initial),
+    );
   }
 
   @override
@@ -36,7 +45,12 @@ class MoviesBloc implements IMoviesBloc {
         status: Status.loading,
       ),
     );
-    _moviesStreamController.sink.add(await _getMoviesUsecase(params: endpoint));
+    _moviesStreamController.sink.add(await _getMoviesUseCase(params: endpoint));
+  }
+
+  @override
+  Future<MovieDetailEvent> getSpecificMovie(movie) async {
+    return await _getMovieDetailUseCase(params: movie);
   }
 
   @override

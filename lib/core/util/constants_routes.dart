@@ -1,2 +1,4 @@
-const String kSplashScreen = 'SplashScreen';
-const String kMainScreen = 'MainScreen';
+abstract class Routes {
+ static const String splashScreen = 'SplashScreen';
+ static const String mainScreen = 'MainScreen';
+}

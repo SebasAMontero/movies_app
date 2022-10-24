@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../../core/util/status_enum.dart';
+import '../../domain/entity/movie_detail_event.dart';
 import '../../core/util/string_constants.dart';
 import '../../domain/entity/movie_event.dart';
 import '../../domain/repository/database_response.dart';
@@ -8,6 +10,7 @@ import '../../domain/repository/i_movies_repository.dart';
 import '../../presentation/bloc/interfaces/i_connection_bloc.dart';
 import '../datasource/local/DAOs/database.dart';
 import '../datasource/remote/api_service.dart';
+import '../model/movie_detail_model.dart';
 import '../model/movie_model.dart';
 
 class MoviesRepository with DatabaseResponse implements IMoviesRepository {
@@ -36,7 +39,7 @@ class MoviesRepository with DatabaseResponse implements IMoviesRepository {
     List<MovieModel> moviesList = [];
     int startIndex = endpoint.lastIndexOf('/');
     String document = endpoint.substring(startIndex + 1) + '_doc';
-    String subcollection = endpoint.substring(startIndex + 1);
+    String subCollection = endpoint.substring(startIndex + 1);
     if (_connectionBloc.isOnline) {
       try {
         var apiResponse = await _service.apiCall(endpoint: endpoint);
@@ -56,7 +59,7 @@ class MoviesRepository with DatabaseResponse implements IMoviesRepository {
             _db.addMovies(
               movies: movies,
               mainCollectionDocument: document,
-              subcollection: subcollection,
+              subCollection: subCollection,
             );
             return MovieEvent(
               movies: moviesList,
@@ -66,18 +69,55 @@ class MoviesRepository with DatabaseResponse implements IMoviesRepository {
         }
         return getMoviesFromDatabase(
           document: document,
-          subcollection: subcollection,
+          subCollection: subCollection,
         );
       } catch (e) {
         return getMoviesFromDatabase(
           document: document,
-          subcollection: subcollection,
+          subCollection: subCollection,
         );
       }
     } else {
       return getMoviesFromDatabase(
         document: document,
-        subcollection: subcollection,
+        subCollection: subCollection,
+      );
+    }
+  }
+
+  @override
+  Future<MovieDetailEvent> fetchMovieDetail(MovieModel? movie) async {
+    if (_connectionBloc.isOnline) {
+      try {
+        var apiResponse = await _service.apiCallMovieId(
+          id: movie?.id.toString(),
+        );
+
+        if (apiResponse.statusCode == HttpStatus.ok) {
+          Map<String, dynamic> movieDetail = json.decode(apiResponse.body);
+
+          _db.addMovieDetail(
+            movie: movieDetail,
+          );
+          MovieDetailModel movieDetailComplete =
+              MovieDetailModel.fromJson(movieDetail);
+
+          return MovieDetailEvent(
+            movie: movieDetailComplete,
+            status: Status.success,
+          );
+        }
+        return getMovieDetailFromDatabase(
+          movie: movie!,
+        );
+      } catch (e) {
+        return getMovieDetailFromDatabase(
+          movie: movie!,
+        );
+      }
+    } else {
+      return getMovieDetailFromDatabase(
+        movie: movie!,
       );
     }
   }

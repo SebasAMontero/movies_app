@@ -1,3 +1,5 @@
+import '../../core/util/status_enum.dart';
+
 import '../../data/model/movie_model.dart';
 
 class MovieEvent {
@@ -10,12 +12,4 @@ class MovieEvent {
     required this.status,
     this.errorMessage,
   });
-}
-
-enum Status {
-  initial,
-  loading,
-  success,
-  empty,
-  error,
 }

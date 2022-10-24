@@ -10,6 +10,7 @@ import 'data/datasource/local/DAOs/database.dart';
 import 'data/datasource/remote/api_service.dart';
 import 'data/repository/movies_repository_impl.dart';
 import 'domain/repository/i_movies_repository.dart';
+import 'domain/usecase/get_movie_detail_usecase.dart';
 import 'domain/usecase/get_movies_usecase.dart';
 import 'domain/usecase/search_movies_usecase.dart';
 import 'presentation/bloc/connection_bloc.dart';
@@ -36,8 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   late http.Client _client;
   late ApiService _service;
   late IMoviesRepository _moviesRepository;
-  late Usecase _getMoviesUsecase;
-  late Usecase _searchMoviesUsecase;
+  late UseCase _getMoviesUseCase;
+  late UseCase _searchMoviesUseCase;
+  late UseCase _getMovieDetailUseCase;
   late IMoviesBloc _moviesBloc;
   late IConnectionBloc _connectionBloc;
 
@@ -52,11 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
       _db,
       _connectionBloc,
     );
-    _getMoviesUsecase = GetMoviesUsecase(_moviesRepository);
-    _searchMoviesUsecase = SearchMoviesUseCase(_moviesRepository);
+    _getMoviesUseCase = GetMoviesUseCase(_moviesRepository);
+    _searchMoviesUseCase = SearchMoviesUseCase(_moviesRepository);
+    _getMovieDetailUseCase = GetMovieDetailUseCase(_moviesRepository);
     _moviesBloc = MoviesBloc(
-      _getMoviesUsecase,
-      _searchMoviesUsecase,
+      _getMoviesUseCase,
+      _getMovieDetailUseCase,
+      _searchMoviesUseCase,
     );
     super.initState();
   }

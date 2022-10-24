@@ -2,6 +2,7 @@ import '.secret_token.dart';
 
 abstract class ServiceConstants {
   static const String baseUrl = 'https://api.themoviedb.org/3';
+    static const String movieUrl = '/movie/';
   static const Map<String, String> headers = {
     'Authorization': 'Bearer $bearerToken'
   };
@@ -17,4 +18,5 @@ abstract class ServiceConstants {
   static const collectionDocumentModifier = '_doc';
 
   static const String imagePath = 'https://image.tmdb.org/t/p/original';
+  static const String movieId = 'id';
 }

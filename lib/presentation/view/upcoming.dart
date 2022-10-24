@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../core/util/constants.dart';
 import '../../core/util/dimensions.dart';
 import '../../core/util/palette.dart';
+import '../../core/util/status_enum.dart';
 import '../../core/util/service_constants.dart';
 import '../../core/util/string_constants.dart';
 import '../../domain/entity/movie_event.dart';
@@ -12,6 +13,7 @@ import '../bloc/interfaces/i_movies_bloc.dart';
 import '../widget/empty_widget.dart';
 import '../widget/error_widget.dart';
 import '../widget/show_image.dart';
+import 'movie_detail_screen.dart';
 
 class Upcoming extends StatefulWidget {
   const Upcoming({Key? key}) : super(key: key);
@@ -54,25 +56,41 @@ class _UpcomingState extends State<Upcoming> {
                   int index,
                   int pageViewIndex,
                 ) {
-                  return Column(
-                    children: [
-                      showImgIfExists(
-                        snapshot.data!.movies![index].posterPath,
-                        Dimensions.moviePosterSize,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: Dimensions.upcomingTextTopPadding),
-                        child: Text(
-                          snapshot.data!.movies![index].title,
-                          style: const TextStyle(
-                            fontSize: Dimensions.upcomingTitleFontSize,
-                            color: Palette.lightFontColor,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (
+                            BuildContext context,
+                          ) =>
+                              MovieDetailScreen(
+                            movie: snapshot.data!.movies![index],
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                      )
-                    ],
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        showImgIfExists(
+                          snapshot.data!.movies![index].posterPath,
+                          Dimensions.moviePosterSize,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: Dimensions.upcomingTextTopPadding,
+                          ),
+                          child: Text(
+                            snapshot.data!.movies![index].title,
+                            style: const TextStyle(
+                              fontSize: Dimensions.upcomingTitleFontSize,
+                              color: Palette.lightFontColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
                   );
                 },
                 options: CarouselOptions(

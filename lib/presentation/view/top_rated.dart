@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/util/palette.dart';
 import '../../core/util/service_constants.dart';
+import '../../core/util/status_enum.dart';
 import '../../core/util/string_constants.dart';
 import '../../domain/entity/movie_event.dart';
 import '../bloc/interfaces/i_movies_bloc.dart';
